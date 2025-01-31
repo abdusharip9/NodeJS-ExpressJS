@@ -1,7 +1,7 @@
 import express from 'express'
 import { create } from 'express-handlebars'
-import AuthRoutes from 'routes/auth.js'
-import ProductsRoutes from 'routes/products.js'
+import AuthRoutes from './routes/auth.js'
+import ProductsRoutes from './routes/products.js'
 
 const app = express()
 
