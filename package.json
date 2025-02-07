@@ -19,6 +19,7 @@
 		"express-handlebars": "^8.0.1",
 		"express-session": "^1.18.1",
 		"handlebars": "^4.7.8",
+		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.9.6"
 	},
 	"devDependencies": {
