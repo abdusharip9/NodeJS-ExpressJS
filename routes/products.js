@@ -4,6 +4,7 @@ const router = Router()
 router.get('/', (req, res) => {
 	res.render('index', {
 		title: 'Home | Sammi',
+		token: true,
 	})
 })
 router.get('/products', (req, res) => {
