@@ -27,7 +27,7 @@ router.get('/register', (req, res) => {
 	})
 })
 
-router.get('login', (req, res) => {
+router.get('/logout', (req, res) => {
 	res.clearCookie('token')
 	res.redirect('/')
 })
