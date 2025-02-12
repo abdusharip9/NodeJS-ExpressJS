@@ -4,9 +4,11 @@ import authMiddleware from '../middleware/auth.js'
 import userMiddleware from '../middleware/user.js'
 const router = Router()
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+	const products = await Product.find().lean()
 	res.render('index', {
 		title: 'Home | Sammi',
+		products: products,
 	})
 })
 router.get('/products', (req, res) => {
