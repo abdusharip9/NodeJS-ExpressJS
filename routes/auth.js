@@ -2,24 +2,17 @@ import bcrypt from 'bcrypt'
 import { Router } from 'express'
 import User from '../models/User.js'
 import { generateJWTToken } from '../services/token.js'
+import chekTokenMiddleware from '../middleware/chekToken.js'
 const router = Router()
 
-router.get('/login', (req, res) => {
-	if (req.cookies.token) {
-		res.redirect('/')
-	}
-
+router.get('/login', chekTokenMiddleware, (req, res) => {
 	res.render('login', {
 		title: 'Login | Sammi',
 		isLogin: true,
 		loginError: req.flash('loginError'),
 	})
 })
-router.get('/register', (req, res) => {
-	if (req.cookies.token) {
-		res.redirect('/')
-	}
-
+router.get('/register', chekTokenMiddleware, (req, res) => {
 	res.render('register', {
 		title: 'Register | Sammi',
 		isRegister: true,

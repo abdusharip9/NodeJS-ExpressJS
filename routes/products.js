@@ -1,5 +1,7 @@
 import { Router } from 'express'
 import Product from '../models/Product.js'
+import authMiddleware from '../middleware/auth.js'
+import userMiddleware from '../middleware/user.js'
 const router = Router()
 
 router.get('/', (req, res) => {
@@ -13,17 +15,23 @@ router.get('/products', (req, res) => {
 		isProduct: true,
 	})
 })
-router.get('/add', (req, res) => {
+router.get('/add', authMiddleware, (req, res) => {
 	res.render('add', {
 		title: 'Add | Sammi',
 		isAdd: true,
+		errorAddProduct: req.flash('errorAddProduct'),
 	})
 })
-router.post('/add-products', async (req, res) => {
+router.post('/add-products', userMiddleware, async (req, res) => {
 	const {title, description, image, price} = req.body
-	const products = await Product.create(req.body)
-	console.log(products);
+	if (!title || !description || !image || !price) {
+		req.flash('errorAddProduct', 'All fields are required')
+		res.redirect('/add')
+		return
+	}
+	console.log(req.userId);
 	
+	await Product.create({...req.body, user: req.userId})
 	res.redirect('/')
 })
 
