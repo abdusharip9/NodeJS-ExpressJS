@@ -27,26 +27,19 @@
 
 				<div class='btn-group' role='group'>
 					{{#if token}}
-					<button type='button' class='btn btn-danger active'><a href='/logout'
-							class='text-light text-decoration-none'>Logout</a></button>
+						<a href='/logout' class='btn btn-danger active text-light text-decoration-none'>Logout</a>
 					{{else}}
-					{{#if isLogin}}
-					<button type='button' class='btn btn-primary active'><a href='/login'
-							class='text-light text-decoration-none'>Login</a></button>
-					{{else}}
-					<button type='button' class='btn btn-outline-primary'><a href='/login'
-							class='text-dark text-decoration-none'>Login</a></button>
+						{{#if isLogin}}
+							<a href='/login' class='btn btn-primary active text-light text-decoration-none'>Login</a>
+						{{else}}
+							<a href='/login' class='btn btn-outline-primary text-dark text-decoration-none'>Login</a>
+						{{/if}}
+						{{#if isRegister}}
+							<a href='/register' class='btn btn-primary active text-light text-decoration-none'>Register</a>
+						{{else}}
+							<a href='/register' class='btn btn-outline-primary text-dark text-decoration-none'>Register</a>
+						{{/if}}
 					{{/if}}
-					{{#if isRegister}}
-					<button type='button' class='btn btn-primary active'><a href='/register'
-							class='text-light text-decoration-none'>Register</a></button>
-					{{else}}
-					<button type='button' class='btn btn-outline-primary'><a href='/register'
-							class='text-dark text-decoration-none'>Register</a></button>
-					{{/if}}
-					{{/if}}
-
-
 
 				</div>
 			</nav>
