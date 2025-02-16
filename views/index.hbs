@@ -13,15 +13,37 @@
         </div>
       </div>
       <div class="card-footer">
-        <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-          <a class="btn btn-outline-primary" href="/product/{{_id}}">Detail</a>
-          {{#if @root.token}}
-          {{#ifequal user @root.userId}}
-          <a href="/edit-product/{{_id}}" class="btn btn-outline-secondary">Edit</a>
-          <button type="button" class="btn btn-outline-danger">Delete</button>
-          {{/ifequal}}
-          {{/if}}
+        <a class="btn btn-outline-primary" href="/product/{{_id}}">Detail</a>
+        {{#if @root.token}}
+        {{#ifequal user @root.userId}}
+        <a href="/edit-product/{{_id}}" class="btn btn-outline-secondary">Edit</a>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+          data-bs-target="#delete-product-{{_id}}-modal">
+          Delete
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="delete-product-{{_id}}-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+          tabindex="-1" aria-labelledby="delete-product-{{_id}}-modal-label" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="delete-product-{{_id}}-modal-label">Are you delete it?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                {{title}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form action="/delete-product/{{_id}}" method="post">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+        {{/ifequal}}
+        {{/if}}
       </div>
     </div>
   </div>
