@@ -20,15 +20,22 @@ router.get('/products', async (req, res) => {
 	const user = req.userId ? req.userId.toString() : null
 	const myProducts = await Product.find({user}).populate('user').lean()
 
-	console.log(myProducts);
-	
-
 	res.render('products', {
 		title: 'Products | Sammi',
 		isProduct: true,
 		myProducts: myProducts,
 	})
 })
+
+router.get('/product/:id', async (req, res)=>{
+	const id = req.params.id
+	const product = await Product.findById(id).populate('user').lean()
+
+	res.render('product', {
+		product: product
+	})
+})
+
 router.get('/add', authMiddleware, (req, res) => {
 	res.render('add', {
 		title: 'Add | Sammi',
