@@ -1,0 +1,34 @@
+<div class='w-75 mx-auto'>
+  <p class='fs-1'>Edit product</p>
+  <div class='mb-3'>
+    {{#if errorEditProduct}}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Error!</strong> {{errorEditProduct}}.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+  </div>
+  <form action='/edit-product/{{product._id}}' method='post'>
+    <div class="form-floating mb-3">
+      <input type='text' value="{{product.title}}" class='form-control' id='title' name='title' placeholder="Title" />
+      <label for='title' class='form-label'>Title</label>
+    </div>
+    <div class="form-floating mb-3">
+      <textarea class="form-control" value="{{product.title}}" placeholder="Description" id="description"
+        name="description" style="height: 200px">{{product.description}}</textarea>
+      <label for="description">Description</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type='text' value="{{product.image}}" class='form-control' id='image' name='image' placeholder="Image" />
+      <label for='image' class='form-label'>Image</label>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text bg-light">$</span>
+      <div class="form-floating">
+        <input type="number" value="{{product.price}}" class="form-control" id="price" name="price" placeholder="Price">
+        <label for="price">Price</label>
+      </div>
+    </div>
+    <button type='submit' class='btn btn-primary mt-3'>Edit product</button>
+  </form>
+</div>

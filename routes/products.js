@@ -36,6 +36,29 @@ router.get('/product/:id', async (req, res)=>{
 	})
 })
 
+router.get('/edit-product/:id', async (req, res)=>{
+	const id = req.params.id
+	const product = await Product.findById(id).populate('user').lean()
+
+	res.render('edit-product', {
+		product: product,
+		errorEditProduct: req.flash('errorEditProduct'),
+	})
+})
+
+router.post('/edit-product/:id', async (req, res)=>{
+	const {title, description, image, price} = req.body
+	const id = req.params.id
+	if (!title || !description || !image || !price) {
+		req.flash('errorAddProduct', 'All fields are required')
+		res.redirect(`/edit-products/${id}`)
+		return
+	}
+
+	await Product.findByIdAndUpdate(id, req.body, {new: true})
+	res.redirect('/products')
+})
+
 router.get('/add', authMiddleware, (req, res) => {
 	res.render('add', {
 		title: 'Add | Sammi',
